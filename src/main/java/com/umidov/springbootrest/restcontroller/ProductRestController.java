@@ -9,65 +9,59 @@ import org.springframework.web.bind.annotation.*;
 public class ProductRestController {
 
     /*
-    * 1.Fetch  resource
-    * 2.Create resource
-    * 3.Modify resource
-    * 4.Remove resource
-    * 5.Partial update resource
-    * 6.
+    * 1.@RequestParam
+    * 2.@PathVariable
+    *
     * */
 
-    // 1.Fetch resource
+
+    // no-order.
     @GetMapping("/getProduct")
-    public ResponseEntity<String> getProduct(){
-        ResponseEntity<String> getProductResponse = new ResponseEntity<>(
-                "This is from GET",
-                HttpStatus.OK
-        );
-        return getProductResponse;
+    public String showData1(
+            @RequestParam("name") String name
+    ){
+        System.out.println(name);
+        return "Check your console";
     }
 
-    // 2.Post resource
-    @PostMapping("/saveProduct")
-    public ResponseEntity<String> postProduct(){
-        ResponseEntity<String> postProductResponse = new ResponseEntity<>(
-                "This is from POST",
-                HttpStatus.OK
-        );
-        return postProductResponse;
+
+    // we should maintain same order.
+    @GetMapping("/getProduct/{id}")
+    public String showData2(
+            @PathVariable("id") Integer id
+    ){
+        System.out.println(id);
+        return "Check your console";
     }
 
-    // 3.Modify resource
-    @PutMapping("/updateProduct")
-    public ResponseEntity<String> updateProduct(){
-        ResponseEntity<String> putProductResponse = new ResponseEntity<>(
-                "This is from PUT",
-                HttpStatus.OK
-        );
-        return putProductResponse;
+    @GetMapping("/details")
+    public ResponseEntity<String> showHeaders(
+            @RequestHeader(value="Content-Length",required=false) String len
+    ){
+        System.out.println(len);
+        return new ResponseEntity<>("done", HttpStatus.OK);
     }
 
-    // 4.Delete resource
-    @DeleteMapping("/deleteProduct")
-    public ResponseEntity<String> deleteProduct(){
-        ResponseEntity<String> deleteProductResponse = new ResponseEntity<>(
-                "This is from DELETE",
-                HttpStatus.OK
-        );
-        return deleteProductResponse;
-    }
-
-    // 5.Partial modify resource
-    @PatchMapping("/patchProduct")
-    public ResponseEntity<String> partialModifyProduct(){
-        ResponseEntity<String> partialModifyProductResponse = new ResponseEntity<>(
-                "This is from PATCH",
-                HttpStatus.OK
-        );
-        return partialModifyProductResponse;
-    }
 
 }
+
+//www.youtube.com/watch?v=aaQ9HgNBx28
+
+/*
+*   REQUEST HEADER USE CASES:
+*   1.Authentication & authorization
+*   2.Accept header
+*   3.Content-type
+*   4.Cookies-header
+*   5.
+*
+* */
+
+
+
+
+
+
 
 
 
